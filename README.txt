@@ -48,3 +48,6 @@ Updated in v9
 Updated in v10
 - Fixed line selection regression.
 - Toolbar is now a single horizontal row so Clear stays aligned with the other controls.
+
+Updated in v11
+- Freehand objects can now be edited with an eraser from the action bar.
