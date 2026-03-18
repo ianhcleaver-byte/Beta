@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Electronic Chart Work</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div id="map"></div>
+
+
+<div id="toolbar">
+  <button class="tool-btn" data-tool="freehand">Freehand</button>
+  <span class="divider">|</span>
+
+  <button class="tool-btn" data-tool="gps">Fix</button>
+  <button class="tool-btn" data-tool="wpt">WPT</button>
+  <span class="divider">|</span>
+
+  <button class="tool-btn" data-tool="line_posn">Bearing</button>
+  <button class="tool-btn" data-tool="line_cmg">CMG</button>
+  <button class="tool-btn" data-tool="line_set">Set</button>
+  <button class="tool-btn" data-tool="line_cts">CTS</button>
+  <span class="divider">|</span>
+
+  <button class="tool-btn" data-tool="pan">Pan</button>
+  <button class="tool-btn" data-tool="select">Select</button>
+  <button class="tool-btn" id="saveBtn">Save</button>
+  <button class="tool-btn" id="loadBtn">Load</button>
+  <button class="tool-btn" id="clearBtn">Clear</button>
+</div>
+
+
+<div id="status">Ready</div>
+<div id="actionBar" class="hidden">
+  <button class="action-btn" id="actionMoveBtn">Move</button>
+  <button class="action-btn" id="actionEditBtn">Edit</button>
+  <button class="action-btn danger" id="actionDeleteBtn">Delete</button>
+  <button class="action-btn" id="actionDoneBtn">Done</button>
+</div>
+<div id="vectorLabel"></div>
+
+
+<div id="savePanel" class="file-panel hidden">
+  <div class="file-panel-title">Save artefacts</div>
+  <label class="modal-label" for="saveFilenameInput">File name</label>
+  <input id="saveFilenameInput" class="modal-input" type="text" placeholder="chartwork-plan-a" />
+  <div class="modal-note">Downloads the current artefacts as a .json file.</div>
+  <div class="modal-actions">
+    <button class="action-btn" id="savePanelCancelBtn">Cancel</button>
+    <button class="action-btn" id="savePanelConfirmBtn">Save file</button>
+  </div>
+</div>
+
+<div id="loadPanel" class="file-panel hidden">
+  <div class="file-panel-title">Load artefacts</div>
+  <label class="modal-label" for="loadFileInput">Choose a saved .json file</label>
+  <input type="file" id="loadFileInput" class="modal-file-input" accept=".json,application/json" />
+  <div class="modal-note">Selecting a file replaces the current artefacts on the map.</div>
+  <div class="modal-actions">
+    <button class="action-btn" id="loadPanelCancelBtn">Close</button>
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

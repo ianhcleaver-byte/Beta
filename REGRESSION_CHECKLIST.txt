@@ -1,0 +1,128 @@
+Electronic Chart Work — REGRESSION CHECKLIST
+
+Baseline version
+- v1-baseline
+
+How to use
+- After any code change, run through this checklist before accepting the new version.
+- Treat this as a smoke test.
+
+A. App loads
+[ ] Local server opens the app correctly
+[ ] Map renders
+[ ] Toolbar renders
+[ ] Status box renders
+[ ] Action bar appears only when expected
+
+B. Core tools present
+[ ] Pan
+[ ] FIX
+[ ] WPT
+[ ] CTS
+[ ] CMG
+[ ] Set
+[ ] P-Line
+[ ] Freehand
+[ ] Select
+[ ] Delete
+[ ] Save
+[ ] Load
+[ ] Clear
+
+C. Point tools
+[ ] FIX can be press-drag-released to place a point
+[ ] FIX shows temporary coordinate box while dragging
+[ ] FIX temporary coordinate box is top-right of the point
+[ ] FIX returns to Pan after placement
+
+[ ] WPT can be press-drag-released to place a point
+[ ] WPT shows temporary coordinate box while dragging
+[ ] WPT temporary coordinate box is top-right of the point
+[ ] WPT returns to Pan after placement
+
+D. Line tools
+[ ] CTS first tap sets start point
+[ ] CTS second press-and-hold previews line
+[ ] CTS release commits line
+[ ] CTS returns to Pan after placement
+
+[ ] CMG first tap sets start point
+[ ] CMG second press-and-hold previews line
+[ ] CMG release commits line
+[ ] CMG returns to Pan after placement
+
+[ ] Set first tap sets start point
+[ ] Set second press-and-hold previews line
+[ ] Set release commits line
+[ ] Set returns to Pan after placement
+
+[ ] P-Line first tap sets start point
+[ ] P-Line second press-and-hold previews line
+[ ] P-Line release commits line
+[ ] P-Line returns to Pan after placement
+
+[ ] Line can start from existing FIX point
+[ ] Line can start from existing WPT point
+[ ] Direction label appears above line
+[ ] Distance label appears below line
+[ ] Labels are parallel to line
+[ ] Labels are never upside down
+[ ] P-Line chevron is at the start of the line
+
+E. Freehand
+[ ] Freehand tool can scribble with stylus/finger
+[ ] Freehand remains active after a stroke
+[ ] Freehand only stops when another tool is selected
+
+F. Select / edit
+[ ] Point artefact can be selected
+[ ] Line artefact can be selected
+[ ] Freehand artefact can be selected
+[ ] Tapping selected artefact again deselects it
+[ ] Action bar appears on selection
+[ ] Move works for point
+[ ] Move works for line
+[ ] Move works for freehand
+[ ] Edit works for point
+[ ] Edit works for line
+[ ] Delete works from action bar
+[ ] Done closes editing / deselects object
+
+G. Storage
+[ ] Save opens filename panel under toolbar
+[ ] Save downloads JSON file
+[ ] Load opens file-picker panel under toolbar
+[ ] Load imports selected JSON file
+[ ] Clear works
+
+H. Visual checks
+[ ] FIX symbol = circle with central dot
+[ ] WPT symbol = square with central dot and crosshairs
+[ ] All artefacts use very dark grey
+[ ] Selected artefacts highlight orange
+[ ] Chevron sizes look correct
+
+
+I. File save / load
+[ ] Top toolbar no longer contains Delete
+[ ] Action bar still contains Delete
+[ ] Save prompts for a file name
+[ ] Save downloads a JSON file
+[ ] Different save files can be created with different names
+[ ] Load opens a file picker
+[ ] Loading a valid JSON save file restores artefacts
+
+
+I. Nautical chart overlay
+[ ] OpenSeaMap seamark overlay is visible
+[ ] Layer control appears on the map
+[ ] Seamark overlay can be toggled on/off
+
+
+J. Updated line UX
+[ ] CTS uses press-drag-release from a single gesture
+[ ] CMG uses press-drag-release from a single gesture
+[ ] Set uses press-drag-release from a single gesture
+[ ] P-Line uses press-drag-release from a single gesture
+[ ] Temporary line info box appears during drag
+[ ] Releasing commits the line

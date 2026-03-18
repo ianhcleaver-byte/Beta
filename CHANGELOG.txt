@@ -1,0 +1,132 @@
+Electronic Chart Work — CHANGELOG
+
+Version: v1-baseline
+Date: 2026-03-17
+
+Summary
+- Established a baseline bundle and agreed workflow for future changes.
+- This bundle is the canonical current version to build on from here.
+
+Current feature set
+- Pan tool
+- FIX point tool
+- WPT point tool
+- CTS line tool
+- CMG line tool
+- Set line tool
+- P-Line tool
+- Freehand scribble tool
+- Select tool
+- Delete tool
+- Save / Load / Clear
+- Option B editing action bar
+
+Behaviour included
+- Point and line tools revert to Pan after use
+- Freehand remains active until another tool is selected
+- Select toggles off when the selected artefact is tapped again
+- FIX uses click/drag/release placement with temporary coordinate box
+- WPT uses click/drag/release placement with temporary coordinate box
+- Temporary coordinate box appears top-right of the point during placement
+- Line tools use:
+  1) first tap to set start point
+  2) second press-and-hold to define temporary end point
+  3) release to commit final endpoint
+- Lines can be started from an existing point symbol
+- P-Line chevron is at the start of the line
+- Permanent line labels are shown:
+  - direction above the line in format (045)T
+  - distance below the line in format 10.2nm
+- Permanent line labels never render upside down
+- Line selection uses an enlarged hit area
+- Freehand restored in current baseline
+
+Editing / object management
+- Selecting an artefact opens action bar with:
+  - Move
+  - Edit
+  - Delete
+  - Done
+- Points can be moved/edited
+- Lines can be moved/edited
+- Freehand can be moved
+- Toolbar Delete remains available
+
+Notes on development workflow
+- Future changes should always be made against this baseline bundle.
+- New releases should be saved as versioned zips.
+- Regressions should be checked against REGRESSION_CHECKLIST.txt.
+
+
+Version: v2-file-save
+Date: 2026-03-17
+
+Changes
+- Removed Delete button from the top toolbar
+- Delete remains available in the select pop-up action bar only
+- Save now exports artefacts to a JSON file
+- Load now imports artefacts from a selected JSON file
+- Multiple versions can now be stored as separate files
+
+
+Version: v3-file-save-modal
+Date: 2026-03-17
+
+Changes
+- Removed top toolbar Delete button; Delete remains only in action bar.
+- Replaced browser prompt/file-input trigger flow with in-app Save and Load modals.
+- Save now opens a visible filename dialog before downloading a JSON file.
+- Load now opens a visible file-picker modal for importing a saved JSON file.
+- Preserved current toolset and behaviours from the latest working bundle.
+
+
+Version: v4-file-save-panel
+Date: 2026-03-17
+
+Changes
+- Replaced overlay modals with persistent in-app Save and Load panels under the toolbar.
+- Save button now opens a visible filename panel.
+- Load button now opens a visible file-picker panel.
+- Added status feedback when Save or Load panel opens.
+- Preserved current artefact and editing behaviours.
+
+
+Version: v5-save-load-panel-fix
+Date: 2026-03-17
+
+Changes
+- Fixed a runtime crash caused by a leftover listener for the removed top-toolbar Delete button.
+- Save and Load panel buttons should now respond normally.
+- Status text should now update correctly when Save or Load is clicked.
+
+
+Version: v6-openseamap-overlay
+Date: 2026-03-17
+
+Changes
+- Added OpenSeaMap seamark overlay on top of the OpenStreetMap base layer.
+- Added a Leaflet layer control so the seamark overlay can be toggled on/off.
+- Kept the rest of the UX unchanged from v5.
+
+
+Version: v7-line-press-drag-release
+Date: 2026-03-17
+
+Changes
+- Changed all line tools to use press-drag-release UX.
+- Line creation now works as:
+  - press and hold = start position
+  - drag = temporary preview with vector info
+  - release = end position
+- Removed the prior first-tap / second-hold line workflow.
+- Kept point, freehand, selection, and file save/load behaviour unchanged.
+
+
+Version: v8-toolbar-reorder
+Date: 2026-03-17
+
+Changes
+- Renamed "P-Line" tool to "Bearing"
+- Reordered toolbar into grouped layout:
+  Freehand | Fix/WPT | Bearing/CMG/Set/CTS | Pan/Select/Save/Load/Clear
+- Added visual dividers between tool groups
