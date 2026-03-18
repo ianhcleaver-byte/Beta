@@ -126,3 +126,10 @@ J. Updated line UX
 [ ] P-Line uses press-drag-release from a single gesture
 [ ] Temporary line info box appears during drag
 [ ] Releasing commits the line
+
+
+K. Toolbar/status fixes
+[ ] CMG tool activates correctly
+[ ] CTS tool activates correctly
+[ ] Status box sits bottom-left
+[ ] Toolbar group spacing shows without visible "|" dividers
