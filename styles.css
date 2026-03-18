@@ -19,10 +19,13 @@ html, body {
   border-radius: 8px;
   padding: 6px;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 6px;
   z-index: 1000;
-  max-width: 860px;
+  max-width: calc(100vw - 20px);
+  overflow-x: auto;
+  overflow-y: hidden;
+  align-items: center;
 }
 
 .tool-btn {
@@ -283,4 +286,14 @@ html, body {
   margin: 0 6px;
   color: #666;
   font-weight: 600;
+}
+
+
+#toolbar::-webkit-scrollbar {
+  height: 0;
+}
+
+.tool-btn,
+.divider {
+  flex: 0 0 auto;
 }

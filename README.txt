@@ -44,3 +44,7 @@ Updated in v9
 - Fixed CMG/CTS button wiring.
 - Moved status box to bottom-left.
 - Replaced visible group dividers with spacing.
+
+Updated in v10
+- Fixed line selection regression.
+- Toolbar is now a single horizontal row so Clear stays aligned with the other controls.

@@ -695,9 +695,13 @@ function renderObject(obj) {
         const wasSelected = selectedObjectId === obj.id;
         selectedObjectId = wasSelected ? null : obj.id;
         actionMode = null;
+        suppressNextMapClick = true;
         renderAllObjects();
         setStatus(selectedObjectId ? 'Selected' : 'Deselected');
-        if (e.originalEvent) e.originalEvent.stopPropagation();
+        if (e.originalEvent) {
+          e.originalEvent.stopPropagation();
+          e.originalEvent.preventDefault();
+        }
         return;
       }
 
