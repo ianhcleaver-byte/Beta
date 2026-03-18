@@ -130,3 +130,12 @@ Changes
 - Reordered toolbar into grouped layout:
   Freehand | Fix/WPT | Bearing/CMG/Set/CTS | Pan/Select/Save/Load/Clear
 - Added visual dividers between tool groups
+
+
+Version: v9-toolbar-debug
+Date: 2026-03-17
+
+Changes
+- Fixed CMG and CTS toolbar buttons to use the correct line tool keys.
+- Moved the status box from top-right to bottom-left so it no longer overlaps the layer control.
+- Replaced visible toolbar group dividers "|" with simple spacing.

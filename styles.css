@@ -58,8 +58,8 @@ html, body {
 
 #status {
   position: absolute;
-  right: 10px;
-  top: 10px;
+  left: 10px;
+  bottom: 10px;
   z-index: 1000;
   background: rgba(255,255,255,0.96);
   border: 1px solid #999;

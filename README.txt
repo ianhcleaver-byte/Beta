@@ -39,3 +39,8 @@ Updated in v7
 
 Updated in v8
 - Toolbar reorganised into logical groups with dividers.
+
+Updated in v9
+- Fixed CMG/CTS button wiring.
+- Moved status box to bottom-left.
+- Replaced visible group dividers with spacing.
