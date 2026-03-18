@@ -139,3 +139,11 @@ L. Selection / toolbar row fixes
 [ ] Selecting a line works
 [ ] Clicking a line no longer immediately deselects it
 [ ] Clear stays on the same row as the other toolbar controls
+
+
+M. Freehand eraser
+[ ] Selecting a freehand object shows the action bar
+[ ] Erase button appears in the action bar
+[ ] Erase mode activates for freehand objects
+[ ] Dragging/dropping the eraser removes part of the freehand stroke
+[ ] A stroke can split into separate remaining freehand segments after erasing

@@ -297,3 +297,13 @@ html, body {
 .divider {
   flex: 0 0 auto;
 }
+
+
+.edit-handle.eraser {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 3px solid #c62828;
+  background: rgba(255,255,255,0.85);
+  box-sizing: border-box;
+}

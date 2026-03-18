@@ -50,6 +50,7 @@ const statusBox = document.getElementById('status');
 const actionBar = document.getElementById('actionBar');
 const actionMoveBtn = document.getElementById('actionMoveBtn');
 const actionEditBtn = document.getElementById('actionEditBtn');
+const actionEraseBtn = document.getElementById('actionEraseBtn');
 const actionDeleteBtn = document.getElementById('actionDeleteBtn');
 const actionDoneBtn = document.getElementById('actionDoneBtn');
 const savePanel = document.getElementById('savePanel');
@@ -113,14 +114,25 @@ function updateActionBar() {
   actionBar.classList.toggle('hidden', !show);
   actionMoveBtn.classList.toggle('active', actionMode === 'move');
   actionEditBtn.classList.toggle('active', actionMode === 'edit');
+  actionEraseBtn.classList.toggle('active', actionMode === 'erase');
 }
 
 function makeHandleIcon(kind = 'round') {
+  const classes = [
+    'edit-handle',
+    kind === 'center' ? 'center' : '',
+    kind === 'square' ? 'square' : '',
+    kind === 'eraser' ? 'eraser' : ''
+  ].filter(Boolean).join(' ');
+
+  const size = kind === 'center' ? [16, 16] : kind === 'eraser' ? [26, 26] : [14, 14];
+  const anchor = kind === 'center' ? [8, 8] : kind === 'eraser' ? [13, 13] : [7, 7];
+
   return L.divIcon({
     className: '',
-    html: `<div class="edit-handle ${kind === 'center' ? 'center' : ''} ${kind === 'square' ? 'square' : ''}"></div>`,
-    iconSize: kind === 'center' ? [16, 16] : [14, 14],
-    iconAnchor: kind === 'center' ? [8, 8] : [7, 7]
+    html: `<div class="${classes}"></div>`,
+    iconSize: size,
+    iconAnchor: anchor
   });
 }
 
@@ -155,6 +167,65 @@ function applyMoveToObject(obj, originalObj, startLatLng, endLatLng) {
   }
 }
 
+function distancePxBetweenLatLng(a, b) {
+  return map.latLngToContainerPoint(a).distanceTo(map.latLngToContainerPoint(b));
+}
+
+function splitFreehandByEraser(points, eraseLatLng, radiusPx = 18) {
+  const segments = [];
+  let current = [];
+
+  for (const p of points) {
+    const ll = L.latLng(p.lat, p.lng);
+    const keep = distancePxBetweenLatLng(ll, eraseLatLng) > radiusPx;
+
+    if (keep) {
+      current.push({ lat: p.lat, lng: p.lng });
+    } else if (current.length >= 2) {
+      segments.push(current);
+      current = [];
+    } else {
+      current = [];
+    }
+  }
+
+  if (current.length >= 2) {
+    segments.push(current);
+  }
+
+  return segments;
+}
+
+function eraseFreehandAtLatLng(objId, eraseLatLng, radiusPx = 18) {
+  const index = objects.findIndex(o => o.id === objId);
+  if (index === -1) return;
+
+  const obj = objects[index];
+  if (!obj || obj.type !== 'freehand') return;
+
+  const segments = splitFreehandByEraser(obj.points, eraseLatLng, radiusPx);
+  const replacement = segments.map(seg => ({
+    id: generateId(),
+    type: 'freehand',
+    points: seg
+  }));
+
+  objects.splice(index, 1, ...replacement);
+
+  if (replacement.length > 0) {
+    selectedObjectId = replacement[0].id;
+    actionMode = 'erase';
+    setStatus(replacement.length === 1 ? 'Erased freehand' : 'Erased and split freehand');
+  } else {
+    selectedObjectId = null;
+    actionMode = null;
+    setStatus('Freehand erased');
+  }
+
+  renderAllObjects();
+}
+
+
 function renderHandles() {
   clearHandleLayers();
   updateActionBar();
@@ -186,6 +257,32 @@ function renderHandles() {
     handleLayers.push(handle);
     return;
   }
+
+
+if (actionMode === 'erase') {
+  if (obj.type !== 'freehand') {
+    setStatus('Erase only works on freehand');
+    return;
+  }
+
+  const center = centroidForObject(obj);
+  if (!center) return;
+
+  const eraserHandle = L.marker(center, {
+    icon: makeHandleIcon('eraser'),
+    draggable: true,
+    keyboard: false
+  }).addTo(map);
+
+  eraserHandle.on('dragend', (e) => {
+    const target = getSelectedObject();
+    if (!target || target.type !== 'freehand') return;
+    eraseFreehandAtLatLng(target.id, e.target.getLatLng(), 18);
+  });
+
+  handleLayers.push(eraserHandle);
+  return;
+}
 
   if (actionMode === 'edit') {
     if (obj.type === 'point') {
@@ -245,7 +342,8 @@ function renderHandles() {
     }
 
     if (obj.type === 'freehand') {
-      setStatus('Freehand: use Move');
+      setStatus('Freehand: use Erase');
+      return;
     }
   }
 }
@@ -1067,14 +1165,27 @@ actionEditBtn.addEventListener('click', () => {
     return;
   }
   if (obj.type === 'freehand') {
-    actionMode = null;
-    renderHandles();
-    setStatus('Freehand: use Move');
+    setStatus('Freehand: use Erase');
     return;
   }
   actionMode = actionMode === 'edit' ? null : 'edit';
   renderHandles();
   setStatus(actionMode === 'edit' ? 'Edit selected object' : 'Selected');
+});
+
+actionEraseBtn.addEventListener('click', () => {
+  const obj = getSelectedObject();
+  if (!obj) {
+    setStatus('No object selected');
+    return;
+  }
+  if (obj.type !== 'freehand') {
+    setStatus('Erase only works on freehand');
+    return;
+  }
+  actionMode = actionMode === 'erase' ? null : 'erase';
+  renderHandles();
+  setStatus(actionMode === 'erase' ? 'Drag eraser over freehand' : 'Selected');
 });
 
 actionDeleteBtn.addEventListener('click', () => {

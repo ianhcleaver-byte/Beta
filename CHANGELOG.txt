@@ -149,3 +149,14 @@ Changes
 - Kept point selection behaviour unchanged.
 - Changed toolbar layout to a single horizontal row with horizontal scrolling if needed.
 - This keeps the Clear button on the same row as the other controls.
+
+
+Version: v11-freehand-eraser
+Date: 2026-03-17
+
+Changes
+- Added an Erase button to the action bar for selected freehand objects.
+- Freehand erase mode now shows a draggable eraser handle.
+- Dropping the eraser on a freehand stroke removes nearby points.
+- If erasing cuts a stroke into separate surviving segments, it splits them into multiple freehand objects.
+- Kept point and line editing unchanged.
