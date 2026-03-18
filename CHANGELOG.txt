@@ -139,3 +139,13 @@ Changes
 - Fixed CMG and CTS toolbar buttons to use the correct line tool keys.
 - Moved the status box from top-right to bottom-left so it no longer overlaps the layer control.
 - Replaced visible toolbar group dividers "|" with simple spacing.
+
+
+Version: v10-select-line-fix
+Date: 2026-03-17
+
+Changes
+- Fixed Select on line tools by preventing the map click handler from immediately clearing line selections.
+- Kept point selection behaviour unchanged.
+- Changed toolbar layout to a single horizontal row with horizontal scrolling if needed.
+- This keeps the Clear button on the same row as the other controls.

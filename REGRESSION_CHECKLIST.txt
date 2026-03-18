@@ -133,3 +133,9 @@ K. Toolbar/status fixes
 [ ] CTS tool activates correctly
 [ ] Status box sits bottom-left
 [ ] Toolbar group spacing shows without visible "|" dividers
+
+
+L. Selection / toolbar row fixes
+[ ] Selecting a line works
+[ ] Clicking a line no longer immediately deselects it
+[ ] Clear stays on the same row as the other toolbar controls
